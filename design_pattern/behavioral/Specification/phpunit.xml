@@ -1,0 +1,36 @@
+<phpunit backupGlobals="true"
+     backupStaticAttributes="false"
+     cacheTokens="false"
+     colors="true"
+     convertErrorsToExceptions="true"
+     convertNoticesToExceptions="true"
+     convertWarningsToExceptions="true"
+     forceCoversAnnotation="false"
+     mapTestClassNameToCoveredClassName="false"
+     processIsolation="false"
+     stopOnError="false"
+     stopOnFailure="false"
+     stopOnIncomplete="false"
+     stopOnSkipped="false"
+     testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader"
+     strict="false"
+     verbose="true">
+    <testsuites>
+    <testsuite name="Specification Design Pattern">
+        <directory>./</directory>
+    </testsuite>
+    </testsuites>
+    <filter>
+    <whitelist addUncoveredFilesFromWhitelist="true">
+        <directory suffix=".php">./src</directory>
+    </whitelist>
+    </filter>
+    <logging>
+    <log type="coverage-clover" target="./clover.xml"/>
+    </logging>
+</phpunit>
+
+     <!--
+     printerClass="PHPUnit_TextUI_ResultPrinter"
+     bootstrap="SpecificationTest"
+     -->
