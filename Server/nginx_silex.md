@@ -1,3 +1,4 @@
+```
 server {
     listen *:80;
     server_name your_domain.com www.your_domain.com;
@@ -33,3 +34,4 @@ server {
         access_log off;
     }
 }
+```
