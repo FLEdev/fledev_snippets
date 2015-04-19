@@ -1,3 +1,4 @@
+```
 // CHMOD
 // change to your Drupal root folder:
 $ cd drupal_root_directory
@@ -26,3 +27,4 @@ $ find . -type d -exec chmod 777 {} \;
 
 // or alternativelly outside the root folder recursivelly for files and folders:
   $ chmod -R user:group /drupal_root_folder
+```

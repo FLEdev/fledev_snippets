@@ -14,9 +14,9 @@ For licensing, see LICENSE.html or <a href="http://ckeditor.com/license">http://
 // After this you can enable CKeditor within the WYSIWYG settings - admin/config/content/wysiwyg
 
 To remove the bottom help link, use the following code within your theme:
-
+```php
 function THEMENAME_filter_tips_more_info() {
   return '';
 }
-
+```
 

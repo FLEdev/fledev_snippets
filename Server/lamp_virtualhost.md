@@ -17,18 +17,14 @@ where the path should link to your site-enabled folder. If you are using another
 
   $ sudo gedit myproject.loc
 4. Add the following lines to it:
+```
 <VirtualHost dev.example.com>
-
     ServerAdmin webmaster@localhost
-
     ServerAlias www.myproject.loc
-
     DocumentRoot /home/www_path_to_project/myproject
-
     CustomLog /home/www_path_to_project/myproject/error.log combined
-
 </VirtualHost>
-
+```
 
 5. Go a level higher and enter the sites-enabled folder like that:
 

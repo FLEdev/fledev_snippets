@@ -7,43 +7,10 @@ The idea behind this is to work with your local projects in a similar manner as 
 The # sign is used to ignore the line following it. This tutorial was made on basis of a Windows XP OS.
 
 1. In c:/WINDOWS/system32/drivers/etc/hosts add:
-
 127.0.0.1  myproject.loc
+
 2. XAMMP:
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
+```
 # In c:/xampp/apache/conf/extra/httpd-vhosts.conf add:
 NameVirtualHost myproject.loc:80
 <VirtualHost myproject.loc:80>
@@ -62,8 +29,10 @@ Alias /myproject/ "/xampp/htdocs/myproject.loc/"
   Order allow,deny
   Allow from all
 </Directory>
+```
 
 # Only check if in c:/xampp/apache/conf/httpd.conf the following lines are there:
+```
 DocumentRoot "/xampp/htdocs"
 <Directory />
   Options FollowSymLinks
@@ -78,50 +47,16 @@ DocumentRoot "/xampp/htdocs"
   Order allow,deny
   Allow from all
 </Directory>
+```
 2. WAMP:
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
 # Make sure that in C:\wamp\bin\apache\Apache2.4.4\conf\httpd.conf at the end:
+```
 Include "c:/wamp/vhosts/*"
 Include "c:/wamp/alias/*"
+```
 
 # in wamp/alias: add your_project.loc file with the content:
+```
 Alias /your_project.loc "c:/www/your_project"
 <Directory c:/www/your_project>
    RewriteEngine on
@@ -130,8 +65,10 @@ Alias /your_project.loc "c:/www/your_project"
    RewriteCond %{REQUEST_FILENAME} !-d
    RewriteRule ^(.*)$ index.php?q=$1 [L,QSA]
 </Directory>
+```
 
 # In wamp/vhosts add your_project.loc file with the content:
+```
 NameVirtualHost your_project.loc:80
 <VirtualHost your_project.loc:80>
   DocumentRoot c:/www/your_project
@@ -139,9 +76,9 @@ NameVirtualHost your_project.loc:80
   ErrorLog C:\wamp\logs\your_projectLoc_error.log
   TransferLog C:\wamp\logs\your_projectLoc_access.log
 </VirtualHost>
-
+```
 # Or only in Alias folder:
-
+```
 NameVirtualHost project.loc
 <VirtualHost project.loc>
     ServerName localhost
@@ -155,6 +92,6 @@ NameVirtualHost project.loc
     Deny from all
     Allow from 127.0.0.1
 </Directory>
-
+```
 3. Restart your apache from your XAMPP console and make sure that the server is started and running. Otherwise look into the log for errors usually in c:/xampp/apache/logs/error.log
 4. If at http://myproject.loc your browser will display your site, you done it. Don't forget to check if your PHPmyAdmin is working properly or set it a separate virtual host.

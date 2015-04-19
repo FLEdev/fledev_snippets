@@ -1,11 +1,15 @@
 Create tar archive:
+```
 $ tar -cvf file.tar home/
 // or compressed:
 $ tar -cvzf fileName.tar.gz folderName/
+```
 
 Extract:
+```
 $ tar -xvf myFile.tar.gz
 $ tar -C folderName -xvf myFile<span class="skimwords-unlinked">.tar</span>
+```
 Arguments:
 
 u = update
@@ -22,7 +26,7 @@ o = Ownership. Assign to extracted files the user and group identifiers of the u
 h = Follow symbolic links as if they were normal files or directories. Normally, tar does not follow symbolic links.
 
 MySQL:
-
+```
 mysql -uUSERNAME -pPASSWORD
 CREATE DATABASE dbname CHARACTER SET utf8 COLLATE utf8_general_ci;
 use DATABASENAME
@@ -43,3 +47,4 @@ SELECT CONCAT(table_schema, '.', table_name),
 FROM   information_schema.TABLES
 ORDER  BY data_length + index_length DESC
 LIMIT  10;
+```

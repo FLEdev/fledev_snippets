@@ -1,5 +1,6 @@
 PHP:
 Intendation: Tab = 2x Spaces. Each row is extra intended regarding curly brackets "{}".
+```
 ¶ = space
 
 If
@@ -16,8 +17,11 @@ if¶($condition1
 }¶else¶{
 ¶¶]defaultaction;
 }
+```
+
 Switch:
 
+```
 switch¶(condition)¶{
 case 1:
 ¶¶action1;
@@ -29,8 +33,10 @@ default:
 ¶¶defaultaction;
 ¶¶break;
 }
-Try catch:
+```
 
+Try catch:
+```
 foreach($dsns as $dsn)¶{
     try¶{
         $this->connectDB($dsn);
@@ -40,8 +46,9 @@ foreach($dsns as $dsn)¶{
         // to connect to one of the databases
     }
 }
+```
 Variables
-
+```
 $short         = foo($bar);
 $long_variable = NULL;
 $string = 'Foo'¶.¶$bar;
@@ -66,8 +73,10 @@ private int variable_name = NULL;
 <span class="simpara">protected function initTree()</span>
 
 // no special definition = public
-Methods
+```
 
+Methods
+```
 function¶functName()¶{
   return(TRUE);
 }
@@ -88,21 +97,25 @@ class Foo_Bar
     //!!! Classes name are Named_Like_That.
     // functions with the same name as the class name - constructors have first lowercase character.
 }
+```
 Comments
 
+```
 /*
 ¶*
 ¶* This is the first row describing the function
 ¶* The function definition is underneath
 ¶*
 */
+```
 
 // First the comment then the code definition
-Source PHP
+
 Drupal exceptions:
 Variable names are lowercase, separated by underscore.
 Alternate control statement syntax for templates
 
+```
 <?php if (!empty($item)): ?>
   <p><?php print funct_call($parameter_name); ?></p>
 <?php endif; ?>
@@ -110,3 +123,4 @@ Alternate control statement syntax for templates
 <?php foreach ($items as $item): ?>
   <p><?php print $item_name; ?></p>
 <?php endforeach; ?>
+```
