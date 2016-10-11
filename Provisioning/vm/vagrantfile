@@ -1,0 +1,55 @@
+# Add the Project name into /manifests/init.pp
+project_name = "PROJECT"
+ip_address = "172.28.128.XX"
+
+unless Vagrant.has_plugin?("vagrant-hostsupdater")
+  raise 'hostsupdater is not installed! Try: vagrant plugin install vagrant-hostsupdater'
+end
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/jessie64"
+
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", 1024]
+    vb.customize ["modifyvm", :id, "--cpus", 2]
+	vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
+	vb.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
+  end
+
+  config.vm.define project_name do |node|
+	config.vm.network :private_network, ip: ip_address
+	config.vm.provision :shell, :inline => "sudo apt-get update --fix-missing && sudo apt-get install puppet -y && export PROJECT_NAME=" + project_name
+    # SSH key configuration:
+    ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+    config.vm.provision 'shell', inline: "echo #{ssh_pub_key} >> /root/.ssh/authorized_keys"
+    config.vm.provision 'shell', inline: "echo #{ssh_pub_key} >> /home/vagrant/.ssh/authorized_keys", privileged: false
+    config.ssh.forward_agent = true
+    config.ssh.insert_key = true
+    #config.ssh.private_key_path = "#{Dir.home}/.ssh/id_rsa"
+
+	config.hostsupdater.aliases = [project_name+".local"]
+	config.hostsupdater.remove_on_suspend = true
+	config.vm.synced_folder "~/Development/" + project_name + "/www/", "/home/vagrant/www/", { :nfs => true }
+  end
+
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = 'puppet/manifests'
+    puppet.manifest_file  = "init.pp"
+    puppet.module_path = 'puppet/modules'
+    #puppet.options = ['--verbose --debug']
+    #project_name=ENV['project_name']
+
+    puppet.facter = {
+    	"project_name" => "#{project_name}"
+    }
+  end
+end
+
+# export XDEBUG_CONFIG="remote_port=8999 remote_host=172.28.128.1 idekey=PHPSTORM"
+
+# Add Vagrant to sudoers
+# sudo visudo
+# Cmnd_Alias VAGRANT_EXPORTS_ADD = /usr/bin/tee -a /etc/exports;/etc/hosts
+# Cmnd_Alias VAGRANT_NFSD = /sbin/nfsd restart
+# Cmnd_Alias VAGRANT_EXPORTS_REMOVE = /usr/bin/sed -E -e /*/ d -ibak /etc/exports;/etc/hosts
+# %admin ALL=(root) NOPASSWD: VAGRANT_EXPORTS_ADD, VAGRANT_NFSD, VAGRANT_EXPORTS_REMOVE
