@@ -1,0 +1,12 @@
+.idea
+.idea/*
+/vendor
+*/vendor
+composer.lock
+web/output/*
+App/raw/*
+logs/
+!logs/.gitkeep
+upload/*
+!App/raw/demo/*
+cache
