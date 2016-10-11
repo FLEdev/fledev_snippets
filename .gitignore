@@ -1,5 +1,7 @@
 .idea
+.idea/*
 .idea/
+.vagrant
 /vendor
 */vendor
 composer.lock
