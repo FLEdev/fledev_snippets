@@ -12,3 +12,4 @@ logs/
 upload/*
 !App/raw/demo/*
 cache
+.DS_Store
