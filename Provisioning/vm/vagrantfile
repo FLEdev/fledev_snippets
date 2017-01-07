@@ -1,5 +1,4 @@
-# Add the Project name into /manifests/init.pp
-project_name = "PROJECT"
+project_name = "dev.local"
 ip_address = "172.28.128.XX"
 
 unless Vagrant.has_plugin?("vagrant-hostsupdater")
@@ -12,13 +11,13 @@ Vagrant.configure("2") do |config|
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", 1024]
     vb.customize ["modifyvm", :id, "--cpus", 2]
-	vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
-	vb.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
+    vb.customize ['modifyvm', :id, '--natdnshostresolver1', 'on']
+    vb.customize ['modifyvm', :id, '--natdnsproxy1', 'on']
   end
 
   config.vm.define project_name do |node|
-	config.vm.network :private_network, ip: ip_address
-	config.vm.provision :shell, :inline => "sudo apt-get update --fix-missing && sudo apt-get install puppet -y && export PROJECT_NAME=" + project_name
+  config.vm.network :private_network, ip: ip_address
+  config.vm.provision :shell, :inline => "sudo apt-get update --fix-missing && sudo apt-get install puppet -y && export PROJECT_NAME=" + project_name
     # SSH key configuration:
     ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
     config.vm.provision 'shell', inline: "echo #{ssh_pub_key} >> /root/.ssh/authorized_keys"
@@ -27,9 +26,9 @@ Vagrant.configure("2") do |config|
     config.ssh.insert_key = true
     #config.ssh.private_key_path = "#{Dir.home}/.ssh/id_rsa"
 
-	config.hostsupdater.aliases = [project_name+".local"]
-	config.hostsupdater.remove_on_suspend = true
-	config.vm.synced_folder "~/Development/" + project_name + "/www/", "/home/vagrant/www/", { :nfs => true }
+    config.hostsupdater.aliases = ["project1.local", "project2.local"]
+    config.hostsupdater.remove_on_suspend = true
+    config.vm.synced_folder "~/Development/projects/", "/var/www/", { :nfs => true }
   end
 
   config.vm.provision "puppet" do |puppet|
@@ -40,7 +39,7 @@ Vagrant.configure("2") do |config|
     #project_name=ENV['project_name']
 
     puppet.facter = {
-    	"project_name" => "#{project_name}"
+      "project_name" => "#{project_name}"
     }
   end
 end

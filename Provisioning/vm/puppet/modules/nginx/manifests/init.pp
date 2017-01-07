@@ -38,26 +38,29 @@ class nginx::install {
     ensure => "running",
     enable => "true",
     require => Exec['stop-apache2'],
-    notify => File['/etc/nginx/sites-available/default']
+    notify => File['/etc/nginx/sites-available/default.conf']
   }
 
-
-  file { '/etc/nginx/sites-available/default':
-    source  => '/vagrant/puppet/modules/nginx/files/etc/nginx/sites-available/default',
-    notify => File['/etc/nginx/sites-enabled/default'],
+  #file { '/etc/nginx/sites-enabled/default.conf':
+  #  ensure  => absent,
+  #  force   => true,
+  #  recurse => true,
+  #  require => Package['nginx'],
+  #}
+  file { '/etc/nginx/sites-available/default.conf':
+    source  => '/vagrant/puppet/modules/nginx/files/etc/nginx/sites-available/default.conf',
+    notify => File['/etc/nginx/sites-enabled/default.conf'],
     require => Package['nginx']
-  }
-
-  file { '/etc/nginx/sites-enabled/default':
-    ensure  => absent,
-    force   => true,
-    recurse => true,
-    require => Package['nginx'],
   }
   file { '/etc/nginx/sites-enabled/default.conf':
     ensure  => link,
-    target  => '/etc/nginx/sites-available/default',
+    target  => '/etc/nginx/sites-available/default.conf',
     require => Package['nginx'],
   }
 
+  file { '/etc/nginx/sites-available/common.conf':
+    source  => '/vagrant/puppet/modules/nginx/files/etc/nginx/sites-available/common.conf',
+    require => Package['nginx'],
+    ensure  => present,
+  }
 }
