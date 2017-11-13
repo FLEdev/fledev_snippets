@@ -1,0 +1,26 @@
+{
+    "name": "devel/blog",
+    "type": "project",
+    "require": {
+        "php": "^7.1",
+        "twig/twig": "^2.4",
+        "symfony/monolog-bundle": "^3.1.0",
+        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/orm": "^2.5",
+        "symfony/yaml": "^3.3",
+        "delight-im/auth": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "app/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Frantisek Leginsky",
+            "email": "f.leginsky@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

@@ -1,0 +1,6 @@
+routes:
+    - { url: '/', name: 'Homepage', controller: 'Controller\MainController', action: 'homeAction', method: 'GET' }
+    - { url: '/login', name: 'Login Page', controller: 'Controller\MainController', action: 'loginAction' }
+    - { url: '/register', name: 'Register Page', controller: 'Controller\MainController', action: 'registerAction' }
+    - { url: '/logout', name: 'Logout Page', controller: 'Controller\MainController', action: 'logoutAction' }
+    - { url: '/dummy/{d}/{w}', name: 'Dummy Route', controller: 'Controller\MainController', action: 'dummyAction' }

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block meta_title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-sm-8">
+           {{ main }}
+        </div>
+        <div class="col-sm-4">
+            {{ sidebar|raw }}
+        </div>
+    </div>
+{% endblock %}
